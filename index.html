@@ -24,46 +24,61 @@ body{
     min-height:100vh;
     overflow-x:hidden;
 
+    /* MORE VISIBLE WHITE + GREY BACKGROUND */
     background:
-        radial-gradient(circle at 8% 5%,#fff 0%,transparent 27%),
-        radial-gradient(circle at 92% 17%,rgba(200,200,200,.75),transparent 31%),
-        radial-gradient(circle at 12% 43%,rgba(222,222,222,.82),transparent 33%),
-        radial-gradient(circle at 88% 56%,rgba(235,235,235,.92),transparent 30%),
-        radial-gradient(circle at 20% 82%,rgba(205,205,205,.65),transparent 31%),
-        radial-gradient(circle at 82% 94%,#fff 0%,transparent 29%),
-        linear-gradient(120deg,#fff 0%,#e5e5e5 30%,#fafafa 54%,#dedede 78%,#fff 100%);
+        radial-gradient(circle at 8% 5%,rgba(255,255,255,.98) 0%,transparent 25%),
+        radial-gradient(circle at 92% 12%,rgba(190,190,190,.70) 0%,transparent 28%),
+        radial-gradient(circle at 5% 38%,rgba(210,210,210,.75) 0%,transparent 30%),
+        radial-gradient(circle at 95% 48%,rgba(195,195,195,.72) 0%,transparent 30%),
+        radial-gradient(circle at 15% 78%,rgba(185,185,185,.62) 0%,transparent 30%),
+        radial-gradient(circle at 85% 90%,rgba(215,215,215,.72) 0%,transparent 30%),
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #dedede 23%,
+            #f8f8f8 42%,
+            #d7d7d7 67%,
+            #fdfdfd 84%,
+            #dcdcdc 100%
+        );
 
-    background-size:180% 180%;
-    animation:backgroundMove 20s ease-in-out infinite alternate;
+    background-size:160% 160%;
+    animation:backgroundMove 18s ease-in-out infinite alternate;
 }
 
 @keyframes backgroundMove{
     0%{background-position:0% 0%}
-    25%{background-position:75% 25%}
-    50%{background-position:100% 70%}
-    75%{background-position:30% 100%}
+    25%{background-position:80% 20%}
+    50%{background-position:100% 80%}
+    75%{background-position:20% 100%}
     100%{background-position:0% 40%}
 }
 
 .background-glow{
     position:fixed;
-    inset:-20%;
+    inset:-15%;
     pointer-events:none;
     z-index:-2;
-    opacity:.7;
+    opacity:.9;
     background:
-        radial-gradient(circle at 20% 20%,rgba(170,170,170,.22),transparent 17%),
-        radial-gradient(circle at 80% 35%,rgba(190,190,190,.20),transparent 19%),
-        radial-gradient(circle at 30% 75%,rgba(160,160,160,.18),transparent 20%),
-        radial-gradient(circle at 75% 85%,rgba(205,205,205,.22),transparent 18%);
+        radial-gradient(circle at 18% 20%,rgba(150,150,150,.25),transparent 18%),
+        radial-gradient(circle at 82% 28%,rgba(165,165,165,.23),transparent 20%),
+        radial-gradient(circle at 28% 75%,rgba(145,145,145,.20),transparent 20%),
+        radial-gradient(circle at 75% 88%,rgba(175,175,175,.24),transparent 18%);
     filter:blur(25px);
-    animation:glowMove 24s ease-in-out infinite alternate;
+    animation:glowMove 20s ease-in-out infinite alternate;
 }
 
 @keyframes glowMove{
-    0%{transform:translate(-4%,-2%) scale(1)}
-    50%{transform:translate(4%,3%) scale(1.08)}
-    100%{transform:translate(-2%,6%) scale(1.02)}
+    0%{
+        transform:translate(-3%,-2%) scale(1);
+    }
+    50%{
+        transform:translate(4%,3%) scale(1.08);
+    }
+    100%{
+        transform:translate(-2%,5%) scale(1.03);
+    }
 }
 
 /* SNOW */
@@ -80,9 +95,11 @@ body{
     position:absolute;
     top:-40px;
     color:#fff;
-    text-shadow:0 0 4px rgba(100,100,100,.35),0 0 10px #fff;
+    text-shadow:
+        0 0 4px rgba(70,70,70,.45),
+        0 0 10px rgba(255,255,255,.95);
     user-select:none;
-    opacity:.88;
+    opacity:.9;
     animation:snowFall linear infinite;
 }
 
@@ -91,10 +108,23 @@ body{
         transform:translate3d(0,-50px,0) rotate(0deg);
         opacity:0;
     }
-    8%{opacity:.9}
-    25%{transform:translate3d(35px,25vh,0) rotate(90deg)}
-    50%{transform:translate3d(-30px,52vh,0) rotate(180deg)}
-    75%{transform:translate3d(40px,77vh,0) rotate(270deg)}
+
+    8%{
+        opacity:.95;
+    }
+
+    25%{
+        transform:translate3d(35px,25vh,0) rotate(90deg);
+    }
+
+    50%{
+        transform:translate3d(-30px,52vh,0) rotate(180deg);
+    }
+
+    75%{
+        transform:translate3d(40px,77vh,0) rotate(270deg);
+    }
+
     100%{
         transform:translate3d(-20px,115vh,0) rotate(360deg);
         opacity:.15;
@@ -128,13 +158,15 @@ body{
 }
 
 .card{
-    background:rgba(255,255,255,.80);
+    background:rgba(255,255,255,.86);
     backdrop-filter:blur(15px);
     -webkit-backdrop-filter:blur(15px);
-    border:1px solid rgba(80,80,80,.14);
+    border:1px solid rgba(80,80,80,.18);
     border-radius:32px;
     padding:42px 30px;
-    box-shadow:0 15px 45px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.95);
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.10),
+        inset 0 1px 0 rgba(255,255,255,.95);
 }
 
 /* HERO */
@@ -218,9 +250,9 @@ h1{
 .owner-card{
     text-align:center;
     padding:28px;
-    border:1px solid #d8d8d8;
+    border:1px solid #d2d2d2;
     border-radius:24px;
-    background:rgba(245,245,245,.78);
+    background:rgba(245,245,245,.82);
 }
 
 .owner-card span{
@@ -240,9 +272,9 @@ h1{
 .members-card{
     text-align:center;
     padding:28px;
-    border:1px solid #d8d8d8;
+    border:1px solid #d2d2d2;
     border-radius:26px;
-    background:rgba(242,242,242,.82);
+    background:rgba(242,242,242,.88);
 }
 
 .members-label{
@@ -253,13 +285,19 @@ h1{
 }
 
 .members-number{
-    font-size:clamp(32px,6vw,54px);
+    font-size:clamp(30px,6vw,54px);
     font-weight:bold;
 }
 
 .members-icon{
     font-size:38px;
     vertical-align:middle;
+}
+
+.member-note{
+    margin-top:10px;
+    font-size:12px;
+    color:#999;
 }
 
 /* MILESTONES */
@@ -313,15 +351,15 @@ h1{
 
 .feature{
     padding:23px 20px;
-    border:1px solid #dadada;
+    border:1px solid #d2d2d2;
     border-radius:23px;
-    background:rgba(248,248,248,.80);
+    background:rgba(248,248,248,.84);
     transition:.25s;
 }
 
 .feature:hover{
     transform:translateY(-3px);
-    box-shadow:0 8px 20px rgba(0,0,0,.06);
+    box-shadow:0 8px 20px rgba(0,0,0,.07);
 }
 
 .feature:last-child{
@@ -344,10 +382,10 @@ h1{
 
 .player-info{
     text-align:center;
-    border:1px solid #d8d8d8;
+    border:1px solid #d2d2d2;
     border-radius:24px;
     padding:25px;
-    background:rgba(248,248,248,.78);
+    background:rgba(248,248,248,.82);
 }
 
 .player-info .label{
@@ -368,8 +406,8 @@ h1{
     text-align:center;
     padding:30px;
     border-radius:25px;
-    background:rgba(245,245,245,.78);
-    border:1px solid #d8d8d8;
+    background:rgba(245,245,245,.84);
+    border:1px solid #d2d2d2;
 }
 
 .join-button{
@@ -449,11 +487,11 @@ h1{
 }
 
 .light{
-    background:#eee;
+    background:#eeeeee;
 }
 
 .dark{
-    background:#aaa;
+    background:#aaaaaa;
 }
 
 .square.selected{
@@ -632,7 +670,11 @@ h1{
 
         <div class="members-number">
             <span class="members-icon">♟</span>
-            <span id="memberCount">Loading...</span>
+            <span id="memberCount">— MEMBERS</span>
+        </div>
+
+        <div class="member-note">
+            Live count updates when Chess.com allows the browser request.
         </div>
 
     </div>
@@ -792,7 +834,7 @@ h1{
 
     <div class="bot-note">
         Stockfish powers the computer opponent.
-        Hard mode searches substantially deeper than Easy and Medium.
+        Hard mode searches deeper than Easy and Medium.
     </div>
 
 </section>
@@ -835,49 +877,60 @@ miffyPicture.addEventListener("error",function(){
 
 
 /* =========================
-   LIVE MEMBER COUNT
+   MEMBER COUNT
    ========================= */
+
+const memberCount =
+    document.getElementById("memberCount");
 
 async function loadMemberCount(){
 
-    const element =
-        document.getElementById("memberCount");
+    const controller =
+        new AbortController();
+
+    const timeout =
+        setTimeout(
+            () => controller.abort(),
+            6000
+        );
 
     try{
 
         const response =
             await fetch(
                 "https://api.chess.com/pub/club/miffy-1",
-                {cache:"no-store"}
+                {
+                    cache:"no-store",
+                    signal:controller.signal
+                }
             );
 
+        clearTimeout(timeout);
+
         if(!response.ok){
-            throw new Error("Chess.com API error");
+            throw new Error("API error");
         }
 
         const data =
             await response.json();
 
-        if(typeof data.members_count==="number"){
+        if(
+            typeof data.members_count === "number"
+        ){
 
-            element.textContent =
+            memberCount.textContent =
                 data.members_count.toLocaleString() +
                 " MEMBERS";
-
-        }else{
-
-            element.textContent="— MEMBERS";
 
         }
 
     }catch(error){
 
-        element.textContent="— MEMBERS";
+        clearTimeout(timeout);
 
-        console.log(
-            "Member count could not be loaded:",
-            error
-        );
+        /* Never leave the page stuck on Loading... */
+        memberCount.textContent =
+            "— MEMBERS";
 
     }
 
@@ -887,7 +940,7 @@ loadMemberCount();
 
 setInterval(
     loadMemberCount,
-    5*60*1000
+    5 * 60 * 1000
 );
 
 
@@ -910,77 +963,30 @@ const sideElement =
 const newGameButton =
     document.getElementById("newGame");
 
-let game=new Chess();
+let game =
+    new Chess();
 
-let playerColor="w";
+let playerColor =
+    "w";
 
-let selectedSquare=null;
+let selectedSquare =
+    null;
 
-let legalTargets=[];
+let legalTargets =
+    [];
 
-let engine=null;
+let engine =
+    null;
 
-let engineReady=false;
+let engineReady =
+    false;
 
-let engineBusy=false;
+let engineBusy =
+    false;
 
 
 /* =========================
    PIECES
    ========================= */
 
-const pieces={
-    w:{
-        p:"♙",
-        r:"♖",
-        n:"♘",
-        b:"♗",
-        q:"♕",
-        k:"♔"
-    },
-    b:{
-        p:"♟",
-        r:"♜",
-        n:"♞",
-        b:"♝",
-        q:"♛",
-        k:"♚"
-    }
-};
-
-
-/* =========================
-   BOARD
-   ========================= */
-
-function squareName(row,col){
-
-    const files=[
-        "a","b","c","d",
-        "e","f","g","h"
-    ];
-
-    return files[col]+(8-row);
-
-}
-
-function drawBoard(){
-
-    boardElement.innerHTML="";
-
-    const board=game.board();
-
-    for(let row=0;row<8;row++){
-
-        for(let col=0;col<8;col++){
-
-            const square=
-                document.createElement("div");
-
-            const name=
-                squareName(row,col);
-
-            const actualRow=
-                playerColor==="w"
-                    ? row
-                    : 7-row
+const pieces
