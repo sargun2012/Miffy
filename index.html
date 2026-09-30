@@ -23,20 +23,20 @@ body{
     overflow-x:hidden;
 
     background:
-        radial-gradient(circle at 8% 5%,rgba(255,255,255,.98) 0%,transparent 25%),
-        radial-gradient(circle at 92% 12%,rgba(190,190,190,.70) 0%,transparent 28%),
-        radial-gradient(circle at 5% 38%,rgba(210,210,210,.75) 0%,transparent 30%),
-        radial-gradient(circle at 95% 48%,rgba(195,195,195,.72) 0%,transparent 30%),
-        radial-gradient(circle at 15% 78%,rgba(185,185,185,.62) 0%,transparent 30%),
-        radial-gradient(circle at 85% 90%,rgba(215,215,215,.72) 0%,transparent 30%),
+        radial-gradient(circle at 10% 10%,rgba(255,255,255,.95) 0%,transparent 24%),
+        radial-gradient(circle at 90% 15%,rgba(180,180,180,.65) 0%,transparent 30%),
+        radial-gradient(circle at 5% 50%,rgba(200,200,200,.60) 0%,transparent 32%),
+        radial-gradient(circle at 95% 55%,rgba(175,175,175,.62) 0%,transparent 32%),
+        radial-gradient(circle at 20% 90%,rgba(190,190,190,.58) 0%,transparent 30%),
+        radial-gradient(circle at 85% 90%,rgba(205,205,205,.65) 0%,transparent 30%),
         linear-gradient(
             135deg,
             #ffffff 0%,
-            #dedede 23%,
-            #f8f8f8 42%,
-            #d7d7d7 67%,
-            #fdfdfd 84%,
-            #dcdcdc 100%
+            #d2d2d2 25%,
+            #f7f7f7 45%,
+            #cfcfcf 68%,
+            #ffffff 88%,
+            #d9d9d9 100%
         );
 
     background-size:180% 180%;
@@ -443,7 +443,7 @@ body{
     </section>
 
 
-    <!-- CLUB DECORATION -->
+    <!-- CLUB INFO -->
     <section class="card">
 
         <h2 class="section-title">
@@ -490,7 +490,8 @@ body{
    LIVE CHESS.COM MEMBER COUNT
    ========================= */
 
-const memberCount = document.getElementById("memberCount");
+const memberCount =
+    document.getElementById("memberCount");
 
 async function updateMemberCount(){
 
@@ -514,12 +515,17 @@ async function updateMemberCount(){
             typeof club.members_count !== "undefined"
         ){
 
-            const count = Number(club.members_count);
+            const count =
+                Number(club.members_count);
 
             if(Number.isFinite(count)){
+
                 memberCount.textContent =
-                    count.toLocaleString() + " MEMBERS";
+                    count.toLocaleString() +
+                    " MEMBERS";
+
             }
+
         }
 
     }catch(error){
@@ -533,7 +539,7 @@ async function updateMemberCount(){
 
 }
 
-/* Load immediately */
+/* Update immediately */
 updateMemberCount();
 
 /* Refresh every 5 minutes */
@@ -563,7 +569,8 @@ function createSnowflake(){
     const flake =
         document.createElement("span");
 
-    flake.className = "snowflake";
+    flake.className =
+        "snowflake";
 
     flake.textContent =
         snowCharacters[
@@ -602,7 +609,9 @@ function createSnowflake(){
         delay + "s";
 
     flake.style.opacity =
-        (Math.random() * .55 + .35).toFixed(2);
+        (
+            Math.random() * .55 + .35
+        ).toFixed(2);
 
     snowContainer.appendChild(flake);
 
@@ -612,16 +621,18 @@ function createSnowflake(){
             flake.remove();
         }
 
-    }, 22000);
+    },22000);
 
 }
 
 
-/* Keep snowfall alive */
+/* Start snowfall */
 for(let i = 0; i < 45; i++){
     createSnowflake();
 }
 
+
+/* Keep snowfall alive */
 setInterval(
     createSnowflake,
     650
