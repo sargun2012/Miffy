@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>M𝚒𝚏𝚏𝚢 𓆡 Chess Club</title>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+<title>M𝚒𝚏𝚏𝚢 𓆡</title>
 
 <style>
 *{
@@ -19,12 +17,11 @@ html{
 }
 
 body{
-    font-family:Georgia,"Times New Roman",serif;
-    color:#303030;
     min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#333;
     overflow-x:hidden;
 
-    /* MORE VISIBLE WHITE + GREY BACKGROUND */
     background:
         radial-gradient(circle at 8% 5%,rgba(255,255,255,.98) 0%,transparent 25%),
         radial-gradient(circle at 92% 12%,rgba(190,190,190,.70) 0%,transparent 28%),
@@ -42,283 +39,195 @@ body{
             #dcdcdc 100%
         );
 
-    background-size:160% 160%;
-    animation:backgroundMove 18s ease-in-out infinite alternate;
+    background-size:180% 180%;
+    animation:bgMove 18s ease-in-out infinite alternate;
 }
 
-@keyframes backgroundMove{
-    0%{background-position:0% 0%}
-    25%{background-position:80% 20%}
-    50%{background-position:100% 80%}
-    75%{background-position:20% 100%}
-    100%{background-position:0% 40%}
-}
-
-.background-glow{
-    position:fixed;
-    inset:-15%;
-    pointer-events:none;
-    z-index:-2;
-    opacity:.9;
-    background:
-        radial-gradient(circle at 18% 20%,rgba(150,150,150,.25),transparent 18%),
-        radial-gradient(circle at 82% 28%,rgba(165,165,165,.23),transparent 20%),
-        radial-gradient(circle at 28% 75%,rgba(145,145,145,.20),transparent 20%),
-        radial-gradient(circle at 75% 88%,rgba(175,175,175,.24),transparent 18%);
-    filter:blur(25px);
-    animation:glowMove 20s ease-in-out infinite alternate;
-}
-
-@keyframes glowMove{
+@keyframes bgMove{
     0%{
-        transform:translate(-3%,-2%) scale(1);
-    }
-    50%{
-        transform:translate(4%,3%) scale(1.08);
+        background-position:0% 0%;
     }
     100%{
-        transform:translate(-2%,5%) scale(1.03);
+        background-position:100% 100%;
     }
 }
 
 /* SNOW */
-
-.snow-container{
+.snow{
     position:fixed;
     inset:0;
-    overflow:hidden;
     pointer-events:none;
-    z-index:50;
+    z-index:0;
+    overflow:hidden;
 }
 
 .snowflake{
     position:absolute;
-    top:-40px;
-    color:#fff;
+    top:-30px;
+    color:rgba(255,255,255,.92);
     text-shadow:
-        0 0 4px rgba(70,70,70,.45),
-        0 0 10px rgba(255,255,255,.95);
+        0 0 5px rgba(130,130,130,.45),
+        0 0 10px rgba(255,255,255,.9);
     user-select:none;
-    opacity:.9;
-    animation:snowFall linear infinite;
+    animation:
+        snowfall linear infinite,
+        drift ease-in-out infinite alternate;
 }
 
-@keyframes snowFall{
-    0%{
-        transform:translate3d(0,-50px,0) rotate(0deg);
-        opacity:0;
+@keyframes snowfall{
+    from{
+        transform:translateY(-40px) rotate(0deg);
     }
-
-    8%{
-        opacity:.95;
-    }
-
-    25%{
-        transform:translate3d(35px,25vh,0) rotate(90deg);
-    }
-
-    50%{
-        transform:translate3d(-30px,52vh,0) rotate(180deg);
-    }
-
-    75%{
-        transform:translate3d(40px,77vh,0) rotate(270deg);
-    }
-
-    100%{
-        transform:translate3d(-20px,115vh,0) rotate(360deg);
-        opacity:.15;
+    to{
+        transform:translateY(110vh) rotate(360deg);
     }
 }
 
-.snowflake:nth-child(1){left:3%;font-size:10px;animation-duration:9s}
-.snowflake:nth-child(2){left:8%;font-size:17px;animation-duration:13s;animation-delay:2s}
-.snowflake:nth-child(3){left:14%;font-size:8px;animation-duration:8s;animation-delay:4s}
-.snowflake:nth-child(4){left:20%;font-size:22px;animation-duration:15s;animation-delay:1s}
-.snowflake:nth-child(5){left:27%;font-size:12px;animation-duration:11s;animation-delay:5s}
-.snowflake:nth-child(6){left:34%;font-size:18px;animation-duration:14s;animation-delay:3s}
-.snowflake:nth-child(7){left:41%;font-size:9px;animation-duration:8s;animation-delay:6s}
-.snowflake:nth-child(8){left:48%;font-size:25px;animation-duration:17s;animation-delay:1s}
-.snowflake:nth-child(9){left:55%;font-size:13px;animation-duration:10s;animation-delay:4s}
-.snowflake:nth-child(10){left:62%;font-size:19px;animation-duration:14s;animation-delay:2s}
-.snowflake:nth-child(11){left:69%;font-size:8px;animation-duration:9s;animation-delay:5s}
-.snowflake:nth-child(12){left:76%;font-size:23px;animation-duration:16s;animation-delay:3s}
-.snowflake:nth-child(13){left:83%;font-size:11px;animation-duration:10s;animation-delay:6s}
-.snowflake:nth-child(14){left:89%;font-size:18px;animation-duration:13s;animation-delay:1s}
-.snowflake:nth-child(15){left:96%;font-size:9px;animation-duration:8s;animation-delay:4s}
-.snowflake:nth-child(16){left:18%;font-size:15px;animation-duration:12s;animation-delay:7s}
-.snowflake:nth-child(17){left:72%;font-size:14px;animation-duration:11s;animation-delay:8s}
-.snowflake:nth-child(18){left:92%;font-size:21px;animation-duration:15s;animation-delay:5s}
+@keyframes drift{
+    from{
+        margin-left:-25px;
+    }
+    to{
+        margin-left:25px;
+    }
+}
 
-/* MAIN */
-
-.container{
-    width:min(920px,94%);
-    margin:35px auto;
+.page{
+    position:relative;
+    z-index:1;
+    width:min(920px,92%);
+    margin:0 auto;
+    padding:30px 0 55px;
 }
 
 .card{
     background:rgba(255,255,255,.86);
-    backdrop-filter:blur(15px);
-    -webkit-backdrop-filter:blur(15px);
-    border:1px solid rgba(80,80,80,.18);
-    border-radius:32px;
-    padding:42px 30px;
+    backdrop-filter:blur(9px);
+    -webkit-backdrop-filter:blur(9px);
+    border:1px solid rgba(255,255,255,.9);
+    border-radius:28px;
     box-shadow:
-        0 15px 45px rgba(0,0,0,.10),
-        inset 0 1px 0 rgba(255,255,255,.95);
+        0 12px 35px rgba(80,80,80,.13),
+        0 2px 8px rgba(80,80,80,.08);
+    padding:28px;
+    margin-bottom:22px;
 }
 
 /* HERO */
-
 .hero{
     text-align:center;
-    padding-bottom:35px;
+    padding:42px 28px 35px;
 }
 
 .miffy-image{
-    width:175px;
-    height:175px;
-    margin:0 auto 15px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.miffy-image img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
+    width:150px;
+    max-width:55%;
+    height:auto;
     display:block;
+    margin:0 auto 15px;
+    filter:drop-shadow(0 8px 10px rgba(0,0,0,.12));
 }
 
-.miffy-fallback{
-    display:none;
-    font-size:110px;
-}
-
-h1{
-    font-size:clamp(42px,8vw,76px);
-    letter-spacing:4px;
-    line-height:1.05;
-    margin-bottom:16px;
+.club-name{
+    font-size:clamp(2.1rem,7vw,4rem);
+    font-weight:800;
+    letter-spacing:1px;
+    color:#292929;
+    margin-bottom:8px;
 }
 
 .est{
-    font-size:17px;
     color:#777;
-    letter-spacing:2px;
-    margin-bottom:18px;
+    font-size:.95rem;
+    margin-bottom:15px;
 }
 
-.face{
-    font-size:27px;
-    margin-bottom:24px;
+.cute-line{
+    font-size:1.35rem;
+    margin:12px 0 20px;
 }
 
 .intro{
     max-width:700px;
     margin:auto;
-    font-size:18px;
-    line-height:1.8;
     color:#555;
+    line-height:1.75;
+    font-size:1rem;
 }
 
 .decor{
-    text-align:center;
-    color:#777;
-    font-size:23px;
-    letter-spacing:5px;
-    margin:18px 0;
+    margin:17px 0;
+    color:#555;
+    line-height:1.7;
+    font-size:1.15rem;
+    word-break:break-word;
 }
 
-/* SECTIONS */
-
-.section{
-    margin-top:38px;
+/* MEMBER COUNT */
+.member-box{
+    text-align:center;
+    padding:20px;
+    border-radius:20px;
+    background:rgba(245,245,245,.88);
+    border:1px solid #ddd;
+    margin-top:25px;
 }
 
-.section-title{
-    text-align:center;
-    font-size:30px;
-    margin-bottom:22px;
+.member-count{
+    font-size:1.7rem;
+    font-weight:800;
+    color:#444;
     letter-spacing:1px;
 }
 
+/* SECTION TITLES */
+.section-title{
+    text-align:center;
+    font-size:1.45rem;
+    margin-bottom:20px;
+    color:#333;
+}
+
 /* OWNER */
-
-.owner-card{
+.owner{
     text-align:center;
-    padding:28px;
-    border:1px solid #d2d2d2;
-    border-radius:24px;
-    background:rgba(245,245,245,.82);
 }
 
-.owner-card span{
+.owner span{
     display:block;
-    font-size:13px;
-    letter-spacing:4px;
-    color:#888;
-    margin-bottom:9px;
-}
-
-.owner-card strong{
-    font-size:25px;
-}
-
-/* MEMBERS */
-
-.members-card{
-    text-align:center;
-    padding:28px;
-    border:1px solid #d2d2d2;
-    border-radius:26px;
-    background:rgba(242,242,242,.88);
-}
-
-.members-label{
-    font-size:14px;
-    letter-spacing:4px;
-    color:#888;
-    margin-bottom:12px;
-}
-
-.members-number{
-    font-size:clamp(30px,6vw,54px);
-    font-weight:bold;
-}
-
-.members-icon{
-    font-size:38px;
-    vertical-align:middle;
-}
-
-.member-note{
-    margin-top:10px;
-    font-size:12px;
+    font-size:.75rem;
+    letter-spacing:3px;
     color:#999;
+    margin-bottom:8px;
+}
+
+.owner strong{
+    font-size:1.25rem;
+    color:#333;
 }
 
 /* MILESTONES */
-
 .milestones{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:14px;
-    margin-top:20px;
+    gap:13px;
 }
 
 .milestone{
-    padding:20px 16px;
-    border-radius:22px;
-    border:1px solid rgba(80,80,80,.13);
+    border-radius:18px;
+    padding:18px 15px;
     text-align:center;
-    transition:.25s;
+    font-weight:700;
+    border:1px solid rgba(0,0,0,.04);
 }
 
-.milestone:hover{
-    transform:translateY(-3px);
+.milestone .number{
+    font-size:1.35rem;
+    margin-bottom:5px;
+}
+
+.milestone .label{
+    font-size:.9rem;
 }
 
 .milestone.green{
@@ -331,244 +240,71 @@ h1{
     color:#a94b4b;
 }
 
-.milestone-number{
-    font-size:25px;
-    font-weight:bold;
-    margin-bottom:7px;
-}
-
-.milestone-name{
-    font-size:15px;
-}
-
-/* FEATURES */
-
-.features{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-}
-
-.feature{
-    padding:23px 20px;
-    border:1px solid #d2d2d2;
-    border-radius:23px;
-    background:rgba(248,248,248,.84);
-    transition:.25s;
-}
-
-.feature:hover{
-    transform:translateY(-3px);
-    box-shadow:0 8px 20px rgba(0,0,0,.07);
-}
-
-.feature:last-child{
-    grid-column:1/-1;
-}
-
-.feature-title{
-    font-size:21px;
-    font-weight:bold;
-    margin-bottom:9px;
-}
-
-.feature-text{
-    color:#666;
-    font-size:16px;
-    line-height:1.6;
-}
-
-/* PLAYER */
-
+/* TITLED PLAYER */
 .player-info{
     text-align:center;
-    border:1px solid #d2d2d2;
-    border-radius:24px;
-    padding:25px;
-    background:rgba(248,248,248,.82);
+    background:rgba(246,246,246,.9);
+    border-radius:20px;
+    padding:21px;
 }
 
 .player-info .label{
-    font-size:13px;
-    letter-spacing:3px;
-    color:#888;
-    margin-bottom:9px;
+    color:#999;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-size:.72rem;
+    margin-bottom:8px;
 }
 
 .player-info .name{
-    font-size:27px;
-    font-weight:bold;
-}
-
-/* JOIN */
-
-.join-box{
-    text-align:center;
-    padding:30px;
-    border-radius:25px;
-    background:rgba(245,245,245,.84);
-    border:1px solid #d2d2d2;
-}
-
-.join-button{
-    display:inline-block;
-    text-decoration:none;
-    color:white;
-    background:#333;
-    padding:14px 30px;
-    border-radius:30px;
-    font-size:17px;
-    transition:.2s;
-}
-
-.join-button:hover{
-    transform:translateY(-2px);
-    background:#555;
-}
-
-/* CHESS BOT */
-
-.bot-controls{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:10px;
-    margin-bottom:20px;
-}
-
-.bot-controls select,
-.bot-controls button{
-    font-family:Georgia,"Times New Roman",serif;
-    border:1px solid #ccc;
-    border-radius:20px;
-    padding:11px 16px;
-    background:white;
+    font-size:1.2rem;
+    font-weight:800;
     color:#333;
-    font-size:15px;
 }
 
-.bot-controls button{
-    cursor:pointer;
-    background:#333;
-    color:white;
-}
-
-.bot-controls button:disabled{
-    opacity:.55;
-    cursor:not-allowed;
-}
-
-.board-wrap{
-    display:flex;
-    justify-content:center;
-}
-
-#board{
-    width:min(88vw,520px);
-    height:min(88vw,520px);
-    display:grid;
-    grid-template-columns:repeat(8,1fr);
-    grid-template-rows:repeat(8,1fr);
-    border:6px solid #333;
-    border-radius:8px;
-    overflow:hidden;
-    box-shadow:0 12px 30px rgba(0,0,0,.15);
-}
-
-.square{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    cursor:pointer;
-    user-select:none;
-    font-size:clamp(27px,7vw,52px);
-    line-height:1;
-    position:relative;
-}
-
-.light{
-    background:#eeeeee;
-}
-
-.dark{
-    background:#aaaaaa;
-}
-
-.square.selected{
-    box-shadow:inset 0 0 0 5px rgba(70,70,70,.5);
-}
-
-.square.legal::after{
-    content:"";
-    width:22%;
-    height:22%;
-    border-radius:50%;
-    background:rgba(50,50,50,.45);
-    position:absolute;
-}
-
-.bot-status{
+/* INFO */
+.info-text{
     text-align:center;
-    min-height:28px;
-    margin-top:17px;
-    font-size:18px;
-    font-weight:bold;
+    line-height:1.8;
+    color:#555;
 }
-
-.bot-note{
-    text-align:center;
-    color:#777;
-    font-size:13px;
-    margin-top:10px;
-    line-height:1.5;
-}
-
-/* FOOTER */
 
 .footer{
     text-align:center;
-    margin-top:35px;
     color:#777;
-    line-height:2;
+    font-size:.85rem;
+    padding:10px 0;
 }
 
-/* MOBILE */
-
 @media(max-width:600px){
-
-    .container{
-        width:96%;
-        margin:15px auto;
+    .page{
+        width:94%;
+        padding-top:18px;
     }
 
     .card{
-        padding:28px 17px;
-        border-radius:26px;
+        padding:22px 17px;
+        border-radius:23px;
     }
 
-    h1{
-        font-size:43px;
-        letter-spacing:3px;
+    .hero{
+        padding:32px 18px;
     }
 
-    .intro{
-        font-size:16px;
+    .miffy-image{
+        width:125px;
     }
 
-    .features{
-        grid-template-columns:1fr;
-    }
-
-    .feature:last-child{
-        grid-column:auto;
+    .club-name{
+        font-size:2.2rem;
     }
 
     .milestones{
         grid-template-columns:1fr;
     }
 
-    .section-title{
-        font-size:26px;
+    .decor{
+        font-size:1rem;
     }
 }
 </style>
@@ -576,417 +312,322 @@ h1{
 
 <body>
 
-<div class="background-glow"></div>
+<div class="snow" id="snow"></div>
 
-<div class="snow-container">
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">•</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">·</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">·</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">•</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">·</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">•</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">·</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-</div>
+<main class="page">
 
-<div class="container">
-<div class="card">
-
-<section class="hero">
-
-    <div class="miffy-image">
+    <!-- HERO -->
+    <section class="card hero">
 
         <img
-            id="miffyPicture"
             src="miffy-transparent.png"
-            alt="Miffy">
+            alt="Miffy"
+            class="miffy-image"
+        >
 
-        <div id="miffyFallback" class="miffy-fallback">
-            ♡
+        <h1 class="club-name">M𝚒𝚏𝚏𝚢 𓆡</h1>
+
+        <div class="est">Est. March 15th, 2026</div>
+
+        <div class="cute-line">
+            🤍 ૮꒰ • ༝ • ꒱ა 🤍
         </div>
-
-    </div>
-
-    <h1>M𝚒𝚏𝚏𝚢 𓆡</h1>
-
-    <div class="est">
-        Est. March 15th, 2026
-    </div>
-
-    <div class="face">
-        🤍 ૮꒰ • ༝ • ꒱ა 🤍
-    </div>
-
-    <div class="decor">
-        𓆝 𓆟 𓆞 𖥔 ݁˖𓆝 𓆟 𓆞
-    </div>
-
-    <p class="intro">
-        Grab your milk tea and click that JOIN button right now to get your special role! come on, what are u waiting for!
-        <br><br>
-        Plz invite your friends so that we could start playing more tournaments and have a more cozyyy community!
-    </p>
-
-    <div class="decor">
-        ⊹ ﹏𓊝﹏𓂁﹏⊹ ˖
-    </div>
-
-</section>
-
-<section class="section">
-
-    <h2 class="section-title">
-        𐙚 Owner 𐙚
-    </h2>
-
-    <div class="owner-card">
-        <span>OWNER</span>
-        <strong>👑 Yoghurt_22 👑</strong>
-    </div>
-
-</section>
-
-<section class="section">
-
-    <h2 class="section-title">
-        𓆝 Club Members 𓆞
-    </h2>
-
-    <div class="members-card">
-
-        <div class="members-label">
-            CURRENT MEMBERS
-        </div>
-
-        <div class="members-number">
-            <span class="members-icon">♟</span>
-            <span id="memberCount">— MEMBERS</span>
-        </div>
-
-        <div class="member-note">
-            Live count updates when Chess.com allows the browser request.
-        </div>
-
-    </div>
-
-    <div class="milestones">
-
-        <div class="milestone green">
-            <div class="milestone-number">10</div>
-            <div class="milestone-name">🌱 First Steps</div>
-        </div>
-
-        <div class="milestone green">
-            <div class="milestone-number">50</div>
-            <div class="milestone-name">🌿 Growing Club</div>
-        </div>
-
-        <div class="milestone green">
-            <div class="milestone-number">100</div>
-            <div class="milestone-name">🌳 Century Club</div>
-        </div>
-
-        <div class="milestone green">
-            <div class="milestone-number">200</div>
-            <div class="milestone-name">⭐ Miffy Community</div>
-        </div>
-
-        <div class="milestone red">
-            <div class="milestone-number">500</div>
-            <div class="milestone-name">🔥 Big Club</div>
-        </div>
-
-        <div class="milestone red">
-            <div class="milestone-number">1000</div>
-            <div class="milestone-name">👑 Miffy Kingdom</div>
-        </div>
-
-    </div>
-
-</section>
-
-<section class="section">
-
-    <h2 class="section-title">
-        𐙚 Miffy Club — Features 𐙚
-    </h2>
-
-    <div class="features">
-
-        <div class="feature">
-            <div class="feature-title">Miffy Community</div>
-            <div class="feature-text">
-                A welcoming space for Miffy fans and chess lovers.
-            </div>
-        </div>
-
-        <div class="feature">
-            <div class="feature-title">Club Tournaments</div>
-            <div class="feature-text">
-                Regular tournaments where members can compete together.
-            </div>
-        </div>
-
-        <div class="feature">
-            <div class="feature-title">Chess Challenges</div>
-            <div class="feature-text">
-                Fun activities to practice and improve your chess.
-            </div>
-        </div>
-
-        <div class="feature">
-            <div class="feature-title">Friendly Community</div>
-            <div class="feature-text">
-                Meet chess friends, chat, and enjoy games together.
-            </div>
-        </div>
-
-        <div class="feature">
-            <div class="feature-title">Miffy Aesthetic</div>
-            <div class="feature-text">
-                A cozy, Miffy-inspired atmosphere throughout the club.
-            </div>
-        </div>
-
-    </div>
-
-</section>
-
-<section class="section">
-
-    <div class="player-info">
-        <div class="label">Titled Player in Club</div>
-        <div class="name">IM Chanelinmyysl</div>
-    </div>
-
-</section>
-
-<section class="section">
-
-    <h2 class="section-title">
-        𐙚 Join Our Cozy Club 𐙚
-    </h2>
-
-    <div class="join-box">
 
         <div class="decor">
             ₊˚.🎧 ✩。☕ 🤎
         </div>
 
-        <p style="font-size:18px;line-height:1.7;margin-bottom:22px;">
-            Come join the Miffy community and play chess with us!
+        <p class="intro">
+            Grab your milk tea and click that JOIN button right now to get your special role! come on, what are u waiting for!
+            <br><br>
+            Plz invite your friends so that we could start playing more tournaments and have a more cozyyy community!
         </p>
 
-        <a
-            class="join-button"
-            href="https://www.chess.com/club/miffy-1"
-            target="_blank"
-            rel="noopener noreferrer">
-            JOIN CLUB
-        </a>
+        <div class="decor">
+            𓆝 𓆟 𓆞 𖥔 ݁˖𓆝 𓆟 𓆞
+        </div>
 
+        <!-- LIVE MEMBER COUNT -->
+        <div class="member-box">
+            <div class="member-count" id="memberCount">
+                — MEMBERS
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- OWNER -->
+    <section class="card owner">
+
+        <h2 class="section-title">
+            𐙚 Owner 𐙚
+        </h2>
+
+        <span>OWNER</span>
+
+        <strong>
+            👑 Yoghurt_22 👑
+        </strong>
+
+        <div class="decor">
+            𐙚 𝒮𝒽𝒾𝓃𝑒 ✧˚‧⁺˖✮
+        </div>
+
+    </section>
+
+
+    <!-- MILESTONES -->
+    <section class="card">
+
+        <h2 class="section-title">
+            𓆝 Club Milestones 𓆞
+        </h2>
+
+        <div class="milestones">
+
+            <div class="milestone green">
+                <div class="number">10</div>
+                <div class="label">🌱 First Steps</div>
+            </div>
+
+            <div class="milestone green">
+                <div class="number">50</div>
+                <div class="label">🌿 Growing Club</div>
+            </div>
+
+            <div class="milestone green">
+                <div class="number">100</div>
+                <div class="label">🌳 Century Club</div>
+            </div>
+
+            <div class="milestone green">
+                <div class="number">200</div>
+                <div class="label">⭐ Miffy Community</div>
+            </div>
+
+            <div class="milestone red">
+                <div class="number">500</div>
+                <div class="label">🔥 Big Club</div>
+            </div>
+
+            <div class="milestone red">
+                <div class="number">1000</div>
+                <div class="label">👑 Miffy Kingdom</div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TITLED PLAYER -->
+    <section class="card">
+
+        <h2 class="section-title">
+            🎧 Titled Player 🎧
+        </h2>
+
+        <div class="player-info">
+
+            <div class="label">
+                Titled Player in Club
+            </div>
+
+            <div class="name">
+                IM Chanelinmyysl
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CLUB DECORATION -->
+    <section class="card">
+
+        <h2 class="section-title">
+            ⋆｡°✩ Miffy Club ✩°｡⋆
+        </h2>
+
+        <div class="info-text">
+
+            <div class="decor">
+                ⊹ ﹏𓊝﹏𓂁﹏⊹ ˖
+            </div>
+
+            <p>
+                ૮꒰ • ༝ • ꒱ა 🤍
+                <br>
+                Play chess, meet new people and enjoy the cozy Miffy community.
+            </p>
+
+            <div class="decor">
+                ⋆。🐚🫧𓇼˖°
+            </div>
+
+            <div class="decor">
+                ˙✧˖°📷 ༘ ⋆。°
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="footer">
+        𓆝 𓆟 𓆞 𖥔 ݁˖𓆝 𓆟 𓆞
+        <br><br>
+        M𝚒𝚏𝚏𝚢 𓆡 • Chess.com Club
     </div>
 
-</section>
+</main>
 
-<section class="section">
-
-    <h2 class="section-title">
-        ♟ Play Against Stockfish ♟
-    </h2>
-
-    <div class="bot-controls">
-
-        <select id="difficulty">
-            <option value="easy">Easy</option>
-            <option value="medium" selected>Medium</option>
-            <option value="hard">Hard</option>
-        </select>
-
-        <select id="side">
-            <option value="white" selected>Play White</option>
-            <option value="black">Play Black</option>
-        </select>
-
-        <button id="newGame" disabled>
-            Loading Engine...
-        </button>
-
-    </div>
-
-    <div class="board-wrap">
-        <div id="board"></div>
-    </div>
-
-    <div id="botStatus" class="bot-status">
-        Loading Stockfish...
-    </div>
-
-    <div class="bot-note">
-        Stockfish powers the computer opponent.
-        Hard mode searches deeper than Easy and Medium.
-    </div>
-
-</section>
-
-<div class="decor" style="margin-top:40px;">
-    𓆝 𓆟 𓆞 𖥔 ݁˖𓆝 𓆟 𓆞𓆝⋆⭒˚.𓆞
-</div>
-
-<footer class="footer">
-
-    <div>⋆。🐚🫧𓇼˖°</div>
-
-    <div>𐙚 𝒮𝒽𝒾𝓃𝑒 ✧˚‧⁺˖✮</div>
-
-    <div>Made with ♡ for M𝚒𝚏𝚏𝚢 𓆡</div>
-
-</footer>
-
-</div>
-</div>
 
 <script>
 
 /* =========================
-   MIFFY IMAGE
+   LIVE CHESS.COM MEMBER COUNT
    ========================= */
 
-const miffyPicture =
-    document.getElementById("miffyPicture");
+const memberCount = document.getElementById("memberCount");
 
-const miffyFallback =
-    document.getElementById("miffyFallback");
-
-miffyPicture.addEventListener("error",function(){
-
-    miffyPicture.style.display="none";
-    miffyFallback.style.display="block";
-
-});
-
-
-/* =========================
-   MEMBER COUNT
-   ========================= */
-
-const memberCount =
-    document.getElementById("memberCount");
-
-async function loadMemberCount(){
-
-    const controller =
-        new AbortController();
-
-    const timeout =
-        setTimeout(
-            () => controller.abort(),
-            6000
-        );
+async function updateMemberCount(){
 
     try{
 
-        const response =
-            await fetch(
-                "https://api.chess.com/pub/club/miffy-1",
-                {
-                    cache:"no-store",
-                    signal:controller.signal
-                }
-            );
-
-        clearTimeout(timeout);
+        const response = await fetch(
+            "https://api.chess.com/pub/club/miffy-1",
+            {
+                cache:"no-store"
+            }
+        );
 
         if(!response.ok){
-            throw new Error("API error");
+            throw new Error("Could not load club data");
         }
 
-        const data =
-            await response.json();
+        const club = await response.json();
 
         if(
-            typeof data.members_count === "number"
+            club &&
+            typeof club.members_count !== "undefined"
         ){
 
-            memberCount.textContent =
-                data.members_count.toLocaleString() +
-                " MEMBERS";
+            const count = Number(club.members_count);
 
+            if(Number.isFinite(count)){
+                memberCount.textContent =
+                    count.toLocaleString() + " MEMBERS";
+            }
         }
 
     }catch(error){
 
-        clearTimeout(timeout);
-
-        /* Never leave the page stuck on Loading... */
-        memberCount.textContent =
-            "— MEMBERS";
+        console.log(
+            "Unable to sync Chess.com member count:",
+            error
+        );
 
     }
 
 }
 
-loadMemberCount();
+/* Load immediately */
+updateMemberCount();
 
+/* Refresh every 5 minutes */
 setInterval(
-    loadMemberCount,
+    updateMemberCount,
     5 * 60 * 1000
 );
 
 
 /* =========================
-   CHESS
+   LIVE SNOWFALL
    ========================= */
 
-const boardElement =
-    document.getElementById("board");
+const snowContainer =
+    document.getElementById("snow");
 
-const statusElement =
-    document.getElementById("botStatus");
+const snowCharacters = [
+    "•",
+    "·",
+    "❄",
+    "✦",
+    "✧"
+];
 
-const difficultyElement =
-    document.getElementById("difficulty");
+function createSnowflake(){
 
-const sideElement =
-    document.getElementById("side");
+    const flake =
+        document.createElement("span");
 
-const newGameButton =
-    document.getElementById("newGame");
+    flake.className = "snowflake";
 
-let game =
-    new Chess();
+    flake.textContent =
+        snowCharacters[
+            Math.floor(
+                Math.random() *
+                snowCharacters.length
+            )
+        ];
 
-let playerColor =
-    "w";
+    const size =
+        Math.random() * 13 + 6;
 
-let selectedSquare =
-    null;
+    const left =
+        Math.random() * 100;
 
-let legalTargets =
-    [];
+    const duration =
+        Math.random() * 9 + 8;
 
-let engine =
-    null;
+    const driftDuration =
+        Math.random() * 3 + 2;
 
-let engineReady =
-    false;
+    const delay =
+        Math.random() * -18;
 
-let engineBusy =
-    false;
+    flake.style.left =
+        left + "%";
+
+    flake.style.fontSize =
+        size + "px";
+
+    flake.style.animationDuration =
+        duration + "s, " +
+        driftDuration + "s";
+
+    flake.style.animationDelay =
+        delay + "s";
+
+    flake.style.opacity =
+        (Math.random() * .55 + .35).toFixed(2);
+
+    snowContainer.appendChild(flake);
+
+    setTimeout(() => {
+
+        if(flake.parentNode){
+            flake.remove();
+        }
+
+    }, 22000);
+
+}
 
 
-/* =========================
-   PIECES
-   ========================= */
+/* Keep snowfall alive */
+for(let i = 0; i < 45; i++){
+    createSnowflake();
+}
 
-const pieces
+setInterval(
+    createSnowflake,
+    650
+);
+
+</script>
+
+</body>
+</html>
