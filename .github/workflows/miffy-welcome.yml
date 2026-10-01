@@ -1,1 +1,222 @@
+name: Miffy New Member Welcome
 
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  welcome-new-members:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get Miffy website files
+        uses: actions/checkout@v4
+
+      - name: Check for new Chess.com members
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          node <<'NODE'
+          const fs = require("fs");
+
+          const CLUB_API =
+            "https://api.chess.com/pub/club/miffy-1/members";
+
+          const STATE_FILE = "data/miffy-members.json";
+          const WELCOME_FILE = "data/welcome.json";
+
+          async function main() {
+            fs.mkdirSync("data", { recursive: true });
+
+            const response = await fetch(CLUB_API, {
+              headers: {
+                "User-Agent": "Miffy-Club-Website/1.0"
+              }
+            });
+
+            if (!response.ok) {
+              throw new Error(
+                `Chess.com API returned ${response.status}`
+              );
+            }
+
+            const club = await response.json();
+
+            const members = (club.all_time || [])
+              .map(member => member.username)
+              .filter(Boolean);
+
+            const currentMembers = [...new Set(members)].sort();
+
+            // First run: create a baseline without welcoming
+            // all existing members.
+            if (!fs.existsSync(STATE_FILE)) {
+              fs.writeFileSync(
+                STATE_FILE,
+                JSON.stringify(currentMembers, null, 2)
+              );
+
+              console.log(
+                `Created first member list with ${currentMembers.length} members.`
+              );
+
+              return;
+            }
+
+            const oldMembers = JSON.parse(
+              fs.readFileSync(STATE_FILE, "utf8")
+            );
+
+            const newMembers = currentMembers.filter(
+              username => !oldMembers.includes(username)
+            );
+
+            fs.writeFileSync(
+              STATE_FILE,
+              JSON.stringify(currentMembers, null, 2)
+            );
+
+            if (newMembers.length === 0) {
+              console.log("No new members.");
+              return;
+            }
+
+            console.log(
+              `New members: ${newMembers.join(", ")}`
+            );
+
+            if (!process.env.OPENAI_API_KEY) {
+              throw new Error("OPENAI_API_KEY is missing.");
+            }
+
+            const welcomeMessages = [];
+
+            for (const username of newMembers) {
+              const prompt = `
+You are the friendly AI welcome assistant for the Miffy 𓆡 Chess.com club.
+
+Write a short, cute and cozy welcome message for a new club member.
+
+New member username: ${username}
+
+Club style:
+- Miffy themed
+- warm and friendly
+- chess community
+- cozy
+- encourage them to join tournaments and invite friends
+- do not mention that you are an AI
+- do not use excessive emojis
+- maximum 3 short sentences
+
+Return only the welcome message.
+              `.trim();
+
+              const aiResponse = await fetch(
+                "https://api.openai.com/v1/responses",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    "Authorization":
+                      `Bearer ${process.env.OPENAI_API_KEY}`
+                  },
+                  body: JSON.stringify({
+                    model: "gpt-5-mini",
+                    input: prompt
+                  })
+                }
+              );
+
+              if (!aiResponse.ok) {
+                const errorText = await aiResponse.text();
+                throw new Error(
+                  `OpenAI API error: ${aiResponse.status} ${errorText}`
+                );
+              }
+
+              const result = await aiResponse.json();
+
+              let message = "";
+
+              if (typeof result.output_text === "string") {
+                message = result.output_text.trim();
+              }
+
+              if (!message && Array.isArray(result.output)) {
+                for (const item of result.output) {
+                  if (!Array.isArray(item.content)) continue;
+
+                  for (const content of item.content) {
+                    if (
+                      content.type === "output_text" &&
+                      typeof content.text === "string"
+                    ) {
+                      message += content.text;
+                    }
+                  }
+                }
+              }
+
+              message = message.trim();
+
+              if (!message) {
+                throw new Error(
+                  `OpenAI returned no welcome message for ${username}.`
+                );
+              }
+
+              welcomeMessages.push({
+                username,
+                message,
+                created_at: new Date().toISOString()
+              });
+            }
+
+            const latest = welcomeMessages[
+              welcomeMessages.length - 1
+            ];
+
+            fs.writeFileSync(
+              WELCOME_FILE,
+              JSON.stringify(
+                {
+                  username: latest.username,
+                  message: latest.message,
+                  created_at: latest.created_at,
+                  new_members: welcomeMessages
+                },
+                null,
+                2
+              )
+            );
+
+            console.log(
+              `Created welcome message for ${welcomeMessages.length} new member(s).`
+            );
+          }
+
+          main().catch(error => {
+            console.error(error);
+            process.exit(1);
+          });
+          NODE
+
+      - name: Save changes to the Miffy website
+        run: |
+          git config user.name "miffy-welcome-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add data/miffy-members.json data/welcome.json
+
+          if git diff --cached --quiet; then
+            echo "No changes to save."
+            exit 0
+          fi
+
+          git commit -m "Update Miffy member welcome"
+          git push
