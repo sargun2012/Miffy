@@ -2,6 +2,8 @@ name: Miffy New Member Welcome
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *
 
 permissions:
   contents: write
