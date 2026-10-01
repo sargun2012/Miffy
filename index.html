@@ -21,174 +21,126 @@ body{
     font-family:Arial,Helvetica,sans-serif;
     color:#333;
     overflow-x:hidden;
-
     background:
-        radial-gradient(circle at 10% 10%,rgba(255,255,255,.95) 0%,transparent 24%),
-        radial-gradient(circle at 90% 15%,rgba(180,180,180,.65) 0%,transparent 30%),
-        radial-gradient(circle at 5% 50%,rgba(200,200,200,.60) 0%,transparent 32%),
-        radial-gradient(circle at 95% 55%,rgba(175,175,175,.62) 0%,transparent 32%),
-        radial-gradient(circle at 20% 90%,rgba(190,190,190,.58) 0%,transparent 30%),
-        radial-gradient(circle at 85% 90%,rgba(205,205,205,.65) 0%,transparent 30%),
-        linear-gradient(
-            135deg,
-            #ffffff 0%,
-            #d2d2d2 25%,
-            #f7f7f7 45%,
-            #cfcfcf 68%,
-            #ffffff 88%,
-            #d9d9d9 100%
-        );
-
+        radial-gradient(circle at 10% 10%,rgba(255,255,255,.98) 0%,transparent 25%),
+        radial-gradient(circle at 90% 15%,rgba(185,185,185,.65) 0%,transparent 30%),
+        radial-gradient(circle at 5% 55%,rgba(205,205,205,.65) 0%,transparent 32%),
+        radial-gradient(circle at 95% 75%,rgba(230,230,230,.9) 0%,transparent 30%),
+        linear-gradient(120deg,#f7f7f7,#d9d9d9,#ffffff,#cfcfcf,#f4f4f4);
     background-size:180% 180%;
     animation:bgMove 18s ease-in-out infinite alternate;
 }
 
 @keyframes bgMove{
-    0%{
-        background-position:0% 0%;
-    }
-    100%{
-        background-position:100% 100%;
-    }
+    0%{background-position:0% 0%}
+    50%{background-position:100% 60%}
+    100%{background-position:20% 100%}
 }
 
-/* SNOW */
-.snow{
+body::before{
+    content:"";
     position:fixed;
-    inset:0;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+    background:rgba(255,255,255,.35);
+    filter:blur(70px);
+    top:20%;
+    left:-150px;
     pointer-events:none;
-    z-index:0;
-    overflow:hidden;
+    animation:glowMove 13s ease-in-out infinite alternate;
 }
 
-.snowflake{
-    position:absolute;
-    top:-30px;
-    color:rgba(255,255,255,.92);
-    text-shadow:
-        0 0 5px rgba(130,130,130,.45),
-        0 0 10px rgba(255,255,255,.9);
-    user-select:none;
-    animation:
-        snowfall linear infinite,
-        drift ease-in-out infinite alternate;
+@keyframes glowMove{
+    from{transform:translate(0,0)}
+    to{transform:translate(75vw,180px)}
 }
 
-@keyframes snowfall{
-    from{
-        transform:translateY(-40px) rotate(0deg);
-    }
-    to{
-        transform:translateY(110vh) rotate(360deg);
-    }
-}
-
-@keyframes drift{
-    from{
-        margin-left:-25px;
-    }
-    to{
-        margin-left:25px;
-    }
-}
-
-.page{
-    position:relative;
-    z-index:1;
+.container{
     width:min(920px,92%);
-    margin:0 auto;
-    padding:30px 0 55px;
+    margin:auto;
+    position:relative;
+    z-index:2;
 }
 
-.card{
-    background:rgba(255,255,255,.86);
-    backdrop-filter:blur(9px);
-    -webkit-backdrop-filter:blur(9px);
-    border:1px solid rgba(255,255,255,.9);
-    border-radius:28px;
-    box-shadow:
-        0 12px 35px rgba(80,80,80,.13),
-        0 2px 8px rgba(80,80,80,.08);
-    padding:28px;
-    margin-bottom:22px;
-}
-
-/* HERO */
 .hero{
     text-align:center;
-    padding:42px 28px 35px;
+    padding:70px 20px 40px;
 }
 
-.miffy-image{
-    width:150px;
-    max-width:55%;
-    height:auto;
-    display:block;
-    margin:0 auto 15px;
-    filter:drop-shadow(0 8px 10px rgba(0,0,0,.12));
+.hero img{
+    width:180px;
+    max-width:65vw;
+    margin-bottom:20px;
+    filter:drop-shadow(0 12px 15px rgba(0,0,0,.13));
 }
 
-.club-name{
-    font-size:clamp(2.1rem,7vw,4rem);
-    font-weight:800;
+.hero h1{
+    font-size:clamp(2.4rem,8vw,4.8rem);
+    font-weight:700;
     letter-spacing:1px;
     color:#292929;
-    margin-bottom:8px;
 }
 
-.est{
+.date{
+    margin-top:8px;
+    font-size:1rem;
     color:#777;
-    font-size:.95rem;
-    margin-bottom:15px;
 }
 
-.cute-line{
-    font-size:1.35rem;
-    margin:12px 0 20px;
+.bunny{
+    margin-top:12px;
+    font-size:1.45rem;
 }
 
 .intro{
     max-width:700px;
-    margin:auto;
-    color:#555;
-    line-height:1.75;
-    font-size:1rem;
+    margin:25px auto 0;
+    line-height:1.8;
+    font-size:1.05rem;
+    color:#444;
 }
 
 .decor{
-    margin:17px 0;
+    margin:25px auto;
+    text-align:center;
+    line-height:1.8;
     color:#555;
-    line-height:1.7;
-    font-size:1.15rem;
     word-break:break-word;
 }
 
-/* MEMBER COUNT */
-.member-box{
-    text-align:center;
-    padding:20px;
-    border-radius:20px;
-    background:rgba(245,245,245,.88);
-    border:1px solid #ddd;
-    margin-top:25px;
-}
-
 .member-count{
-    font-size:1.7rem;
-    font-weight:800;
-    color:#444;
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 25px;
+    border-radius:999px;
+    background:rgba(255,255,255,.75);
+    border:1px solid rgba(120,120,120,.2);
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    font-weight:700;
     letter-spacing:1px;
 }
 
-/* SECTION TITLES */
+.section{
+    margin:28px 0;
+}
+
+.card{
+    background:rgba(255,255,255,.72);
+    border:1px solid rgba(130,130,130,.2);
+    border-radius:28px;
+    padding:30px;
+    box-shadow:0 15px 35px rgba(0,0,0,.09);
+    backdrop-filter:blur(12px);
+}
+
 .section-title{
     text-align:center;
-    font-size:1.45rem;
-    margin-bottom:20px;
+    font-size:1.65rem;
+    margin-bottom:24px;
     color:#333;
 }
 
-/* OWNER */
 .owner{
     text-align:center;
 }
@@ -197,16 +149,14 @@ body{
     display:block;
     font-size:.75rem;
     letter-spacing:3px;
-    color:#999;
-    margin-bottom:8px;
+    color:#888;
+    margin-bottom:7px;
 }
 
 .owner strong{
-    font-size:1.25rem;
-    color:#333;
+    font-size:1.3rem;
 }
 
-/* MILESTONES */
 .milestones{
     display:grid;
     grid-template-columns:repeat(2,1fr);
@@ -215,18 +165,18 @@ body{
 
 .milestone{
     border-radius:18px;
-    padding:18px 15px;
+    padding:18px;
     text-align:center;
     font-weight:700;
-    border:1px solid rgba(0,0,0,.04);
 }
 
-.milestone .number{
-    font-size:1.35rem;
+.milestone strong{
+    display:block;
+    font-size:1.15rem;
     margin-bottom:5px;
 }
 
-.milestone .label{
+.milestone span{
     font-size:.9rem;
 }
 
@@ -240,71 +190,155 @@ body{
     color:#a94b4b;
 }
 
-/* TITLED PLAYER */
 .player-info{
     text-align:center;
-    background:rgba(246,246,246,.9);
-    border-radius:20px;
-    padding:21px;
+    padding:10px;
 }
 
 .player-info .label{
-    color:#999;
-    text-transform:uppercase;
-    letter-spacing:2px;
-    font-size:.72rem;
+    color:#777;
+    font-size:.9rem;
     margin-bottom:8px;
 }
 
 .player-info .name{
-    font-size:1.2rem;
-    font-weight:800;
-    color:#333;
+    font-size:1.35rem;
+    font-weight:700;
 }
 
-/* INFO */
-.info-text{
+.welcome-card{
+    display:none;
+    text-align:center;
+    background:rgba(255,255,255,.82);
+}
+
+.welcome-card.show{
+    display:block;
+}
+
+.welcome-label{
+    color:#888;
+    font-size:.82rem;
+    letter-spacing:2px;
+    margin-bottom:10px;
+}
+
+.welcome-name{
+    font-size:1.5rem;
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+.welcome-message{
+    max-width:650px;
+    margin:auto;
+    line-height:1.7;
+    color:#555;
+}
+
+.club-description{
     text-align:center;
     line-height:1.8;
     color:#555;
 }
 
-.footer{
-    text-align:center;
-    color:#777;
-    font-size:.85rem;
-    padding:10px 0;
+.features{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin-top:25px;
 }
 
-@media(max-width:600px){
-    .page{
-        width:94%;
-        padding-top:18px;
+.feature{
+    background:rgba(245,245,245,.8);
+    border:1px solid rgba(120,120,120,.14);
+    border-radius:20px;
+    padding:20px;
+}
+
+.feature h3{
+    font-size:1.05rem;
+    margin-bottom:8px;
+    color:#333;
+}
+
+.feature p{
+    font-size:.92rem;
+    line-height:1.55;
+    color:#666;
+}
+
+.feature:last-child{
+    grid-column:1/-1;
+}
+
+.fish{
+    text-align:center;
+    margin:25px auto;
+    font-size:1.3rem;
+    line-height:2;
+    color:#555;
+}
+
+.footer{
+    text-align:center;
+    padding:35px 20px 50px;
+    color:#777;
+    font-size:.9rem;
+}
+
+.footer-main{
+    margin-bottom:10px;
+}
+
+.snowflake{
+    position:fixed;
+    top:-30px;
+    color:white;
+    text-shadow:0 0 7px rgba(255,255,255,.9);
+    pointer-events:none;
+    z-index:1;
+    user-select:none;
+    animation-name:snowFall;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite;
+}
+
+@keyframes snowFall{
+    0%{
+        transform:translate3d(0,-30px,0) rotate(0deg);
+    }
+    25%{
+        transform:translate3d(22px,25vh,0) rotate(80deg);
+    }
+    50%{
+        transform:translate3d(-18px,50vh,0) rotate(160deg);
+    }
+    75%{
+        transform:translate3d(25px,75vh,0) rotate(240deg);
+    }
+    100%{
+        transform:translate3d(-10px,110vh,0) rotate(360deg);
+    }
+}
+
+@media(max-width:650px){
+    .hero{
+        padding-top:45px;
     }
 
     .card{
-        padding:22px 17px;
+        padding:22px;
         border-radius:23px;
     }
 
-    .hero{
-        padding:32px 18px;
-    }
-
-    .miffy-image{
-        width:125px;
-    }
-
-    .club-name{
-        font-size:2.2rem;
-    }
-
-    .milestones{
+    .milestones,
+    .features{
         grid-template-columns:1fr;
     }
 
-    .decor{
-        font-size:1rem;
+    .feature:last-child{
+        grid-column:auto;
     }
 }
 </style>
@@ -312,195 +346,173 @@ body{
 
 <body>
 
-<div class="snow" id="snow"></div>
+<div class="container">
 
-<main class="page">
+    <header class="hero">
+        <img src="miffy-transparent.png" alt="Miffy">
 
-    <!-- HERO -->
-    <section class="card hero">
+        <h1>M𝚒𝚏𝚏𝚢 𓆡</h1>
 
-        <img
-            src="miffy-transparent.png"
-            alt="Miffy"
-            class="miffy-image"
-        >
+        <div class="date">Est. March 15th, 2026</div>
 
-        <h1 class="club-name">M𝚒𝚏𝚏𝚢 𓆡</h1>
+        <div class="bunny">🤍 ૮꒰ • ༝ • ꒱ა 🤍</div>
 
-        <div class="est">Est. March 15th, 2026</div>
-
-        <div class="cute-line">
-            🤍 ૮꒰ • ༝ • ꒱ა 🤍
+        <div class="intro">
+            Grab your milk tea and click that JOIN button right now to get your special role! come on, what are u waiting for!
+            <br><br>
+            Plz invite your friends so that we could start playing more tournaments and have a more cozyyy community!
         </div>
 
         <div class="decor">
             ₊˚.🎧 ✩。☕ 🤎
+            <br>
+            𓆝 𓆟 𓆞 𖥔 ݁˖𓆝 𓆟 𓆞𓆝⋆⭒˚.𓆞
         </div>
 
-        <p class="intro">
-            Grab your milk tea and click that JOIN button right now to get your special role! come on, what are u waiting for!
-            <br><br>
-            Plz invite your friends so that we could start playing more tournaments and have a more cozyyy community!
-        </p>
-
-        <div class="decor">
-            𓆝 𓆟 𓆞 𖥔 ݁˖𓆝 𓆟 𓆞
+        <div id="memberCount" class="member-count">
+            — MEMBERS
         </div>
+    </header>
 
-        <!-- LIVE MEMBER COUNT -->
-        <div class="member-box">
-            <div class="member-count" id="memberCount">
-                — MEMBERS
-            </div>
+    <section class="section">
+        <div class="card owner">
+            <h2 class="section-title">𐙚 Owner 𐙚</h2>
+            <span>OWNER</span>
+            <strong>👑 Yoghurt_22 👑</strong>
         </div>
-
     </section>
 
+    <section class="section">
+        <div class="card">
+            <h2 class="section-title">𐙚 Membership Milestones 𐙚</h2>
 
-    <!-- OWNER -->
-    <section class="card owner">
+            <div class="milestones">
 
-        <h2 class="section-title">
-            𐙚 Owner 𐙚
-        </h2>
+                <div class="milestone green">
+                    <strong>10 Members</strong>
+                    <span>🌱 First Steps</span>
+                </div>
 
-        <span>OWNER</span>
+                <div class="milestone green">
+                    <strong>50 Members</strong>
+                    <span>🌿 Growing Club</span>
+                </div>
 
-        <strong>
-            👑 Yoghurt_22 👑
-        </strong>
+                <div class="milestone green">
+                    <strong>100 Members</strong>
+                    <span>🌳 Century Club</span>
+                </div>
 
-        <div class="decor">
-            𐙚 𝒮𝒽𝒾𝓃𝑒 ✧˚‧⁺˖✮
+                <div class="milestone green">
+                    <strong>200 Members</strong>
+                    <span>⭐ Miffy Community</span>
+                </div>
+
+                <div class="milestone red">
+                    <strong>500 Members</strong>
+                    <span>🔥 Big Club</span>
+                </div>
+
+                <div class="milestone red">
+                    <strong>1000 Members</strong>
+                    <span>👑 Miffy Kingdom</span>
+                </div>
+
+            </div>
         </div>
-
     </section>
 
-
-    <!-- MILESTONES -->
-    <section class="card">
-
-        <h2 class="section-title">
-            𓆝 Club Milestones 𓆞
-        </h2>
-
-        <div class="milestones">
-
-            <div class="milestone green">
-                <div class="number">10</div>
-                <div class="label">🌱 First Steps</div>
-            </div>
-
-            <div class="milestone green">
-                <div class="number">50</div>
-                <div class="label">🌿 Growing Club</div>
-            </div>
-
-            <div class="milestone green">
-                <div class="number">100</div>
-                <div class="label">🌳 Century Club</div>
-            </div>
-
-            <div class="milestone green">
-                <div class="number">200</div>
-                <div class="label">⭐ Miffy Community</div>
-            </div>
-
-            <div class="milestone red">
-                <div class="number">500</div>
-                <div class="label">🔥 Big Club</div>
-            </div>
-
-            <div class="milestone red">
-                <div class="number">1000</div>
-                <div class="label">👑 Miffy Kingdom</div>
-            </div>
-
+    <section class="section">
+        <div class="card player-info">
+            <h2 class="section-title">𐙚 Titled Player 𐙚</h2>
+            <div class="label">Titled Player in Club</div>
+            <div class="name">IM Chanelinmyysl</div>
         </div>
-
     </section>
 
-
-    <!-- TITLED PLAYER -->
-    <section class="card">
-
-        <h2 class="section-title">
-            🎧 Titled Player 🎧
-        </h2>
-
-        <div class="player-info">
-
-            <div class="label">
-                Titled Player in Club
-            </div>
-
-            <div class="name">
-                IM Chanelinmyysl
-            </div>
-
+    <section class="section">
+        <div id="welcomeCard" class="card welcome-card">
+            <div class="welcome-label">NEW MEMBER</div>
+            <div id="welcomeName" class="welcome-name"></div>
+            <div id="welcomeMessage" class="welcome-message"></div>
         </div>
-
     </section>
 
+    <section class="section">
+        <div class="card">
+            <h2 class="section-title">🤍 ⋆｡°✩ Miffy Club ✩°｡⋆ 🤍</h2>
 
-    <!-- CLUB INFO -->
-    <section class="card">
+            <div class="club-description">
+                🤍 ૮꒰ • ༝ • ꒱ა 🤍
+            </div>
 
-        <h2 class="section-title">
-            🤍 ⋆｡°✩ Miffy Club ✩°｡⋆ 🤍
-        </h2>
+            <div class="features">
 
-        <div class="info-text">
+                <div class="feature">
+                    <h3>Miffy Community</h3>
+                    <p>A welcoming space for Miffy fans and chess lovers.</p>
+                </div>
 
-            <div class="decor">
+                <div class="feature">
+                    <h3>Club Tournaments</h3>
+                    <p>Regular tournaments where members can compete together.</p>
+                </div>
+
+                <div class="feature">
+                    <h3>Chess Challenges</h3>
+                    <p>Fun activities to practice and improve your chess.</p>
+                </div>
+
+                <div class="feature">
+                    <h3>Friendly Community</h3>
+                    <p>Meet chess friends, chat, and enjoy games together.</p>
+                </div>
+
+                <div class="feature">
+                    <h3>Miffy Aesthetic</h3>
+                    <p>A cozy, Miffy-inspired atmosphere throughout the club.</p>
+                </div>
+
+            </div>
+
+            <div class="fish">
                 ⊹ ﹏𓊝﹏𓂁﹏⊹ ˖
-            </div>
-
-            <p>
-               🤍 ૮꒰ • ༝ • ꒱ა 🤍
                 <br>
-                Play chess, meet new people and enjoy the cozy Miffy community.
-            </p>
-
-            <div class="decor">
+                𐙚 𝒮𝒽𝒾𝓃𝑒 ✧˚‧⁺˖✮
+                <br>
                 ⋆。🐚🫧𓇼˖°
             </div>
-
-            <div class="decor">
-                ˙✧˖°📷 ༘ ⋆。°
-            </div>
-
         </div>
-
     </section>
 
+    <footer class="footer">
+        <div class="footer-main">
+            🎧 ▶︎•၊၊||၊|။|||||။၊|။•
+        </div>
 
-    <div class="footer">
-        𓆝 𓆟 𓆞 𖥔 ݁˖𓆝 𓆟 𓆞
-        <br><br>
-        M𝚒𝚏𝚏𝚢 𓆡 • Chess.com Club
-    </div>
+        <div>
+            M𝚒𝚏𝚏𝚢 𓆡 · Chess.com Club
+        </div>
 
-</main>
+        <div>
+            ˙✧˖°📷 ༘ ⋆。°
+        </div>
+    </footer>
 
+</div>
 
 <script>
-
-/* =========================
-   LIVE CHESS.COM MEMBER COUNT
-   ========================= */
-
-const memberCount =
-    document.getElementById("memberCount");
+const memberCount = document.getElementById("memberCount");
 
 async function updateMemberCount(){
-
     try{
-
         const response = await fetch(
             "https://api.chess.com/pub/club/miffy-1",
             {
-                cache:"no-store"
+                cache:"no-store",
+                headers:{
+                    "Accept":"application/json"
+                }
             }
         );
 
@@ -514,130 +526,113 @@ async function updateMemberCount(){
             club &&
             typeof club.members_count !== "undefined"
         ){
-
-            const count =
-                Number(club.members_count);
+            const count = Number(club.members_count);
 
             if(Number.isFinite(count)){
-
                 memberCount.textContent =
-                    count.toLocaleString() +
-                    " MEMBERS";
-
+                    count.toLocaleString() + " MEMBERS";
             }
-
         }
-
     }catch(error){
-
         console.log(
             "Unable to sync Chess.com member count:",
             error
         );
-
     }
-
 }
 
-/* Update immediately */
 updateMemberCount();
-
-/* Refresh every 5 minutes */
-setInterval(
-    updateMemberCount,
-    5 * 60 * 1000
-);
+setInterval(updateMemberCount,5 * 60 * 1000);
 
 
-/* =========================
-   LIVE SNOWFALL
-   ========================= */
+const welcomeCard = document.getElementById("welcomeCard");
+const welcomeName = document.getElementById("welcomeName");
+const welcomeMessage = document.getElementById("welcomeMessage");
 
-const snowContainer =
-    document.getElementById("snow");
+async function loadWelcomeMessage(){
+    try{
+        const response = await fetch(
+            "data/welcome.json?cache=" + Date.now(),
+            {
+                cache:"no-store"
+            }
+        );
 
-const snowCharacters = [
-    "•",
-    "·",
-    "❄",
-    "✦",
-    "✧"
-];
-
-function createSnowflake(){
-
-    const flake =
-        document.createElement("span");
-
-    flake.className =
-        "snowflake";
-
-    flake.textContent =
-        snowCharacters[
-            Math.floor(
-                Math.random() *
-                snowCharacters.length
-            )
-        ];
-
-    const size =
-        Math.random() * 13 + 6;
-
-    const left =
-        Math.random() * 100;
-
-    const duration =
-        Math.random() * 9 + 8;
-
-    const driftDuration =
-        Math.random() * 3 + 2;
-
-    const delay =
-        Math.random() * -18;
-
-    flake.style.left =
-        left + "%";
-
-    flake.style.fontSize =
-        size + "px";
-
-    flake.style.animationDuration =
-        duration + "s, " +
-        driftDuration + "s";
-
-    flake.style.animationDelay =
-        delay + "s";
-
-    flake.style.opacity =
-        (
-            Math.random() * .55 + .35
-        ).toFixed(2);
-
-    snowContainer.appendChild(flake);
-
-    setTimeout(() => {
-
-        if(flake.parentNode){
-            flake.remove();
+        if(!response.ok){
+            return;
         }
 
-    },22000);
+        const data = await response.json();
 
+        if(
+            data &&
+            data.username &&
+            data.message
+        ){
+            welcomeName.textContent =
+                "🤍 Welcome, " + data.username + "! 🤍";
+
+            welcomeMessage.textContent =
+                data.message;
+
+            welcomeCard.classList.add("show");
+        }
+    }catch(error){
+        console.log(
+            "No new member welcome message available:",
+            error
+        );
+    }
 }
 
+loadWelcomeMessage();
+setInterval(loadWelcomeMessage,5 * 60 * 1000);
 
-/* Start snowfall */
-for(let i = 0; i < 45; i++){
+
+function createSnowflake(){
+    const snowflake = document.createElement("div");
+
+    snowflake.className = "snowflake";
+    snowflake.textContent =
+        Math.random() > .82 ? "❄" : "•";
+
+    const size =
+        Math.random() * 12 + 5;
+
+    const duration =
+        Math.random() * 10 + 9;
+
+    const delay =
+        Math.random() * -20;
+
+    snowflake.style.left =
+        Math.random() * 100 + "vw";
+
+    snowflake.style.fontSize =
+        size + "px";
+
+    snowflake.style.opacity =
+        (Math.random() * .55 + .3).toFixed(2);
+
+    snowflake.style.animationDuration =
+        duration + "s";
+
+    snowflake.style.animationDelay =
+        delay + "s";
+
+    document.body.appendChild(snowflake);
+
+    setTimeout(
+        () => snowflake.remove(),
+        (duration + 20) * 1000
+    );
+}
+
+for(let i = 0; i < 85; i++){
     createSnowflake();
 }
 
-
-/* Keep snowfall alive */
-setInterval(
-    createSnowflake,
-    650
-);
-
+setInterval(createSnowflake,700);
 </script>
 
 </body>
