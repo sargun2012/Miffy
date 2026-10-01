@@ -22,10 +22,10 @@ body{
     min-height:100vh;
     overflow-x:hidden;
     background:
-        radial-gradient(circle at 15% 20%,rgba(255,255,255,.95),transparent 30%),
-        radial-gradient(circle at 85% 30%,rgba(205,205,205,.28),transparent 32%),
-        radial-gradient(circle at 45% 85%,rgba(255,255,255,.9),transparent 35%),
-        linear-gradient(135deg,#f5f5f4,#dededd,#f8f8f7,#e7e7e6);
+        radial-gradient(circle at 15% 20%,rgba(255,255,255,.82),transparent 30%),
+        radial-gradient(circle at 85% 30%,rgba(190,190,190,.32),transparent 32%),
+        radial-gradient(circle at 45% 85%,rgba(255,255,255,.72),transparent 35%),
+        linear-gradient(135deg,#dedede,#cfcfcf,#e3e3e3,#d4d4d4);
     background-size:220% 220%;
     animation:bgMove 18s ease-in-out infinite alternate;
 }
@@ -42,7 +42,7 @@ body::before{
     width:450px;
     height:450px;
     border-radius:50%;
-    background:rgba(255,255,255,.48);
+    background:rgba(255,255,255,.42);
     filter:blur(80px);
     top:5%;
     left:-130px;
@@ -68,9 +68,12 @@ body::before{
 .flake{
     position:absolute;
     top:-30px;
-    color:rgba(255,255,255,.9);
-    text-shadow:0 1px 5px rgba(100,100,100,.18);
+    color:#ffffff;
+    text-shadow:
+        0 1px 4px rgba(60,60,60,.48),
+        0 0 7px rgba(255,255,255,1);
     animation:fall linear infinite;
+    z-index:1;
 }
 
 @keyframes fall{
@@ -78,13 +81,15 @@ body::before{
         transform:translateY(-30px) translateX(0);
         opacity:0;
     }
-    10%{opacity:.9}
+    10%{
+        opacity:.95;
+    }
     50%{
         transform:translateY(55vh) translateX(35px);
     }
     100%{
         transform:translateY(110vh) translateX(-35px);
-        opacity:.2;
+        opacity:.25;
     }
 }
 
@@ -659,7 +664,7 @@ h1{
     <section class="section">
 
         <h2 class="section-title">
-            ૮꒰ • ༝ • ꒱ა 🤍 𐙚 About Miffy 𐙚 🤍 ૮꒰ • ༝ • ꒱ა
+            🤍 ૮꒰ • ༝ • ꒱ა 𐙚 About Miffy 𐙚 ૮꒰ • ༝ • ꒱ა 🤍
         </h2>
 
         <div class="info-grid">
@@ -701,7 +706,7 @@ h1{
             <div class="aesthetic-text">
 
                 <p>
-                    Here in Miffy 🐇, you don't have to already be a Miffy expert.
+                    Here in Miffy, you don't have to already be a Miffy expert.
                     Whether you joined for chess, the aesthetics, the community, or simply
                     because you thought the bunny was cute, you're welcome here.
                 </p>
