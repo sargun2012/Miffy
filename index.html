@@ -190,7 +190,7 @@ h1{
     font-weight:bold;
 }
 
-/* ABOUT MIFFY TITLE — FIXED */
+/* ABOUT MIFFY TITLE */
 
 .about-title{
     white-space:normal !important;
@@ -220,6 +220,101 @@ h1{
     display:block;
     color:#705c58;
     font-size:1.45rem;
+}
+
+/* CALENDAR */
+
+.calendar-section{
+    margin:22px auto 0;
+    max-width:620px;
+    padding:22px;
+    border-radius:24px;
+    background:#f8f5f2;
+    border:1px solid #e9e2de;
+    box-shadow:0 8px 24px rgba(90,90,90,.06);
+}
+
+.calendar-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:12px;
+}
+
+.calendar-month{
+    flex:1;
+    text-align:center;
+    color:#88736d;
+    font-size:1.3rem;
+    font-weight:bold;
+}
+
+.calendar-button{
+    width:40px;
+    height:40px;
+    border:0;
+    border-radius:50%;
+    background:#eee9e5;
+    color:#776963;
+    font-size:1.25rem;
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.calendar-button:hover{
+    background:#e5dfdb;
+    transform:scale(1.05);
+}
+
+.calendar-location{
+    text-align:center;
+    margin:0 0 18px;
+    color:#88736d;
+    font-size:1.05rem;
+    font-weight:bold;
+    line-height:1.9;
+}
+
+.calendar-location div{
+    display:block;
+}
+
+.calendar-weekdays,
+.calendar-days{
+    display:grid;
+    grid-template-columns:repeat(7,minmax(0,1fr));
+    gap:6px;
+}
+
+.calendar-weekday{
+    text-align:center;
+    color:#a18e88;
+    font-size:.78rem;
+    font-weight:bold;
+    padding:7px 2px;
+}
+
+.calendar-day{
+    aspect-ratio:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-width:0;
+    border-radius:50%;
+    color:#756763;
+    font-size:.9rem;
+}
+
+.calendar-day.empty{
+    visibility:hidden;
+}
+
+.calendar-day.today{
+    background:#e5e1e7;
+    color:#655c67;
+    font-weight:bold;
+    box-shadow:0 3px 10px rgba(100,90,100,.08);
 }
 
 /* MILESTONES */
@@ -519,6 +614,23 @@ h1{
     .aesthetic-content{
         padding:22px 17px;
     }
+
+    .calendar-section{
+        padding:17px 12px;
+    }
+
+    .calendar-weekdays,
+    .calendar-days{
+        gap:3px;
+    }
+
+    .calendar-day{
+        font-size:.82rem;
+    }
+
+    .calendar-location{
+        font-size:1rem;
+    }
 }
 
 @media(max-width:420px){
@@ -558,6 +670,20 @@ h1{
         font-size:1.5rem;
         padding:16px 27px;
         white-space:nowrap;
+    }
+
+    .calendar-month{
+        font-size:1.05rem;
+    }
+
+    .calendar-button{
+        width:36px;
+        height:36px;
+        font-size:1.1rem;
+    }
+
+    .calendar-location{
+        font-size:.95rem;
     }
 }
 </style>
@@ -634,6 +760,70 @@ h1{
 
     </section>
 
+    <div class="calendar-section">
+
+        <div class="calendar-header">
+
+            <button
+                class="calendar-button"
+                id="previousMonth"
+                type="button"
+                aria-label="Previous month"
+            >
+                ‹
+            </button>
+
+            <div
+                class="calendar-month"
+                id="calendarMonth"
+            ></div>
+
+            <button
+                class="calendar-button"
+                id="nextMonth"
+                type="button"
+                aria-label="Next month"
+            >
+                ›
+            </button>
+
+        </div>
+
+        <div class="calendar-location">
+
+            <div id="visitorTime">
+                Time: Loading...
+            </div>
+
+            <div id="visitorCountry">
+                Country: Loading...
+            </div>
+
+            <div id="visitorArea">
+                Area: Loading...
+            </div>
+
+        </div>
+
+        <div class="calendar-weekdays">
+
+            <div class="calendar-weekday">Sun</div>
+            <div class="calendar-weekday">Mon</div>
+            <div class="calendar-weekday">Tue</div>
+            <div class="calendar-weekday">Wed</div>
+            <div class="calendar-weekday">Thu</div>
+            <div class="calendar-weekday">Fri</div>
+            <div class="calendar-weekday">Sat</div>
+
+        </div>
+
+        <div
+            class="calendar-days"
+            id="calendarDays"
+        ></div>
+
+    </div>
+
     <section class="section">
 
         <h2 class="section-title">
@@ -694,7 +884,6 @@ h1{
 
     </section>
 
-    <!-- FIXED: About Miffy is now safely split into two lines -->
     <section class="section">
 
         <h2 class="section-title about-title">
@@ -771,7 +960,7 @@ h1{
         𓆝 𓆟 𓆞 𖥔 ݁˖𓆝 𓆟 𓆞𓆝⋆⭒˚.𓆞
     </div>
 
-    <section class="section">
+        <section class="section">
 
         <h2 class="section-title">
             🎀 𐙚 Club Features 𐙚 🎀
@@ -785,34 +974,28 @@ h1{
             </div>
 
             <div class="feature">
-                <strong>Club Tournaments</strong>
-                Play together and help the club grow its tournament community.
+                <strong>Chess Tournaments</strong>
+                Play together, compete, and make fun memories with the club.
             </div>
 
             <div class="feature">
-                <strong>Chess Friends</strong>
-                Invite your friends and have more people to play and chat with.
+                <strong>Miffy Vibes</strong>
+                Enjoy a soft, cute, cozy atmosphere inspired by Miffy.
             </div>
 
             <div class="feature">
-                <strong>Miffy Aesthetic</strong>
-                A soft, cute and relaxing theme inspired by Miffy.
+                <strong>Friendly Games</strong>
+                Find opponents, play chess, and keep the community active.
             </div>
 
             <div class="feature">
                 <strong>Growing Together</strong>
-                Every new member helps us reach the next Miffy milestone.
+                Invite friends and help our little Miffy community grow.
             </div>
 
         </div>
 
     </section>
-
-    <div class="decor">
-        🎧 ▶︎•၊၊||၊|။|||||။၊|။•
-        <br>
-        🎧🎱🍙✧˖°𖦹…
-    </div>
 
     <section class="section">
 
@@ -824,22 +1007,16 @@ h1{
 
             <div class="sweet">1. Nanashi jelly</div>
             <div class="sweet">2. Imo dango</div>
-
             <div class="sweet">3. Yomogi dango</div>
             <div class="sweet">4. Zenzai</div>
-
             <div class="sweet">5. Matcha zenzai</div>
-            <div class="sweet">6. Yumochi</div>
-
+            <div class="sweet">6. Yumo chi</div>
             <div class="sweet">7. Daifuku</div>
             <div class="sweet">8. Mitarashi dango</div>
-
             <div class="sweet">9. Anmitsu</div>
             <div class="sweet">10. Kinako</div>
-
             <div class="sweet">11. Zunda mochi</div>
             <div class="sweet">12. Warabi mochi</div>
-
             <div class="sweet">13. Strawberry warabi mochi</div>
             <div class="sweet">14. Abekawa mochi</div>
 
@@ -848,15 +1025,15 @@ h1{
     </section>
 
     <div class="decor">
-        ⊹ ﹏𓊝﹏𓂁﹏⊹ ˖
-        <br>
-        𓆝 𓆟 𓆞 𖥔 ݁˖𓆝 𓆟 𓆞
+        𓆝 𓆟 𓆞
+        ♡
+        𓆝 𓆟 𓆞
     </div>
 
     <footer class="footer">
 
         <div class="footer-decor">
-            𐙚 𝒮𝒽𝒾𝓃𝑒 ✧˚‧⁺˖✮
+            🤍 ૮꒰ • ༝ • ꒱ა 🤍
         </div>
 
         <div>
@@ -873,7 +1050,286 @@ h1{
 
 <script>
 
-const memberCount = document.getElementById("memberCount");
+/* CALENDAR — INDEPENDENT FROM API */
+
+const calendarMonth =
+    document.getElementById("calendarMonth");
+
+const calendarDays =
+    document.getElementById("calendarDays");
+
+const previousMonth =
+    document.getElementById("previousMonth");
+
+const nextMonth =
+    document.getElementById("nextMonth");
+
+const visitorTime =
+    document.getElementById("visitorTime");
+
+const visitorCountry =
+    document.getElementById("visitorCountry");
+
+const visitorArea =
+    document.getElementById("visitorArea");
+
+const calendarToday = new Date();
+
+let calendarYear =
+    calendarToday.getFullYear();
+
+let calendarMonthIndex =
+    calendarToday.getMonth();
+
+const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+];
+
+function renderCalendar(){
+
+    calendarMonth.textContent =
+        monthNames[calendarMonthIndex] +
+        " " +
+        calendarYear;
+
+    calendarDays.innerHTML = "";
+
+    const firstDay =
+        new Date(
+            calendarYear,
+            calendarMonthIndex,
+            1
+        ).getDay();
+
+    const daysInMonth =
+        new Date(
+            calendarYear,
+            calendarMonthIndex + 1,
+            0
+        ).getDate();
+
+    for(let i = 0; i < firstDay; i++){
+
+        const emptyDay =
+            document.createElement("div");
+
+        emptyDay.className =
+            "calendar-day empty";
+
+        calendarDays.appendChild(emptyDay);
+
+    }
+
+    for(let day = 1; day <= daysInMonth; day++){
+
+        const dayElement =
+            document.createElement("div");
+
+        dayElement.className =
+            "calendar-day";
+
+        dayElement.textContent = day;
+
+        if(
+            day === calendarToday.getDate() &&
+            calendarMonthIndex === calendarToday.getMonth() &&
+            calendarYear === calendarToday.getFullYear()
+        ){
+
+            dayElement.classList.add("today");
+
+        }
+
+        calendarDays.appendChild(dayElement);
+
+    }
+
+}
+
+previousMonth.addEventListener(
+    "click",
+    function(){
+
+        calendarMonthIndex--;
+
+        if(calendarMonthIndex < 0){
+
+            calendarMonthIndex = 11;
+            calendarYear--;
+
+        }
+
+        renderCalendar();
+
+    }
+);
+
+nextMonth.addEventListener(
+    "click",
+    function(){
+
+        calendarMonthIndex++;
+
+        if(calendarMonthIndex > 11){
+
+            calendarMonthIndex = 0;
+            calendarYear++;
+
+        }
+
+        renderCalendar();
+
+    }
+);
+
+
+/* VISITOR LOCAL TIME */
+
+const timezoneCountryMap = {
+
+    "Asia/Kolkata":"India",
+    "Asia/Calcutta":"India",
+    "Asia/Karachi":"Pakistan",
+    "Asia/Dhaka":"Bangladesh",
+    "Asia/Kathmandu":"Nepal",
+    "Asia/Colombo":"Sri Lanka",
+    "Asia/Tokyo":"Japan",
+    "Asia/Seoul":"South Korea",
+    "Asia/Shanghai":"China",
+    "Asia/Hong_Kong":"Hong Kong",
+    "Asia/Singapore":"Singapore",
+    "Asia/Bangkok":"Thailand",
+    "Asia/Jakarta":"Indonesia",
+    "Asia/Manila":"Philippines",
+    "Europe/London":"United Kingdom",
+    "Europe/Paris":"France",
+    "Europe/Berlin":"Germany",
+    "Europe/Madrid":"Spain",
+    "Europe/Rome":"Italy",
+    "Europe/Amsterdam":"Netherlands",
+    "Europe/Moscow":"Russia",
+    "America/New_York":"United States",
+    "America/Chicago":"United States",
+    "America/Denver":"United States",
+    "America/Los_Angeles":"United States",
+    "America/Toronto":"Canada",
+    "America/Vancouver":"Canada",
+    "America/Mexico_City":"Mexico",
+    "Australia/Sydney":"Australia",
+    "Australia/Melbourne":"Australia",
+    "Australia/Perth":"Australia",
+    "Pacific/Auckland":"New Zealand",
+    "Africa/Cairo":"Egypt",
+    "Africa/Johannesburg":"South Africa",
+    "Africa/Nairobi":"Kenya"
+
+};
+
+const timezoneAreaMap = {
+
+    "Asia/Kolkata":"Kolkata",
+    "Asia/Calcutta":"Kolkata",
+    "Asia/Karachi":"Karachi",
+    "Asia/Dhaka":"Dhaka",
+    "Asia/Kathmandu":"Kathmandu",
+    "Asia/Colombo":"Colombo",
+    "Asia/Tokyo":"Tokyo",
+    "Asia/Seoul":"Seoul",
+    "Asia/Shanghai":"Shanghai",
+    "Asia/Hong_Kong":"Hong Kong",
+    "Asia/Singapore":"Singapore",
+    "Asia/Bangkok":"Bangkok",
+    "Asia/Jakarta":"Jakarta",
+    "Asia/Manila":"Manila",
+    "Europe/London":"London",
+    "Europe/Paris":"Paris",
+    "Europe/Berlin":"Berlin",
+    "Europe/Madrid":"Madrid",
+    "Europe/Rome":"Rome",
+    "Europe/Amsterdam":"Amsterdam",
+    "Europe/Moscow":"Moscow",
+    "America/New_York":"New York",
+    "America/Chicago":"Chicago",
+    "America/Denver":"Denver",
+    "America/Los_Angeles":"Los Angeles",
+    "America/Toronto":"Toronto",
+    "America/Vancouver":"Vancouver",
+    "America/Mexico_City":"Mexico City",
+    "Australia/Sydney":"Sydney",
+    "Australia/Melbourne":"Melbourne",
+    "Australia/Perth":"Perth",
+    "Pacific/Auckland":"Auckland",
+    "Africa/Cairo":"Cairo",
+    "Africa/Johannesburg":"Johannesburg",
+    "Africa/Nairobi":"Nairobi"
+
+};
+
+function updateVisitorInfo(){
+
+    const now = new Date();
+
+    const timezone =
+        Intl.DateTimeFormat()
+        .resolvedOptions()
+        .timeZone || "";
+
+    visitorTime.textContent =
+        "Time: " +
+        now.toLocaleTimeString([],{
+            hour:"numeric",
+            minute:"2-digit",
+            second:"2-digit"
+        });
+
+    visitorCountry.textContent =
+        "Country: " +
+        (timezoneCountryMap[timezone] || "Unknown");
+
+    let area =
+        timezoneAreaMap[timezone];
+
+    if(!area && timezone.includes("/")){
+
+        area =
+            timezone
+            .split("/")
+            .pop()
+            .replace(/_/g," ");
+
+    }
+
+    visitorArea.textContent =
+        "Area: " +
+        (area || "Local");
+
+}
+
+renderCalendar();
+
+updateVisitorInfo();
+
+setInterval(
+    updateVisitorInfo,
+    1000
+);
+
+
+/* CHESS.COM MEMBER COUNT API */
+
+const memberCount =
+    document.getElementById("memberCount");
 
 async function updateMemberCount(){
 
@@ -897,12 +1353,15 @@ async function updateMemberCount(){
             typeof club.members_count !== "undefined"
         ){
 
-            const count = Number(club.members_count);
+            const count =
+                Number(club.members_count);
 
             if(Number.isFinite(count)){
 
                 memberCount.textContent =
-                    "✨ " + count.toLocaleString() + " Members ✨";
+                    "✨ " +
+                    count.toLocaleString() +
+                    " Members ✨";
 
             }
 
@@ -930,3 +1389,5 @@ setInterval(
 
 </body>
 </html>
+
+        
